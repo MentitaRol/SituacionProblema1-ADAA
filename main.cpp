@@ -5,14 +5,15 @@
 
 using namespace std;
 
+vector<string> files = {
+    "transmission01.txt",
+    "transmission21.txt",
+    "mcode01.txt",
+    "mcode02.txt",
+    "mcode03.txt"
+};
+
 void readfiles(){
-    vector<string> files = {
-        "transmission01.txt",
-        "transmission02.txt",
-        "mcode01.txt",
-        "mcode02.txt",
-        "mcode03.txt"
-    };
 
     for(const auto& fileName : files){
         ifstream file(fileName);
@@ -23,12 +24,15 @@ void readfiles(){
 
         string text;
 
-        getline(file, text);
+        cout << "Archivo: " << fileName << "\n";
+        while(getline(file, text)){        
+            cout << text << "\n";
+        }
+
+        cout << "\n";
 
         file.close();
 
-        cout << "Archivo: " << fileName << "\n";
-        cout << text << "\n\n";
     }
 }
 
