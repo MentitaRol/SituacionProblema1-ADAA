@@ -3,17 +3,19 @@
 #include <string>
 #include <vector>
 
+#include "manacher.h"
+
 using namespace std;
 
-vector<string> files = {
-    "transmission01.txt",
-    "transmission21.txt",
-    "mcode01.txt",
-    "mcode02.txt",
-    "mcode03.txt"
-};
-
 void readfiles(){
+
+    vector<string> files = {
+        "transmission01.txt",
+        "transmission02.txt",
+        "mcode01.txt",
+        "mcode02.txt",
+        "mcode03.txt"
+    };
 
     for(const auto& fileName : files){
         ifstream file(fileName);
@@ -25,18 +27,25 @@ void readfiles(){
         string text;
 
         cout << "Archivo: " << fileName << "\n";
-        while(getline(file, text)){        
+        while(getline(file, text)){    
             cout << text << "\n";
         }
 
         cout << "\n";
-
         file.close();
-
     }
 }
 
 int main (){
+
+    vector<string> transmissionFiles = {
+        "transmission01.txt",
+        "transmission21.txt",
+    };
+
+    for(int i = 0; i < transmissionFiles.size(); i++){
+        cout << transmissionFiles[i];
+    }
 
     readfiles();
 
