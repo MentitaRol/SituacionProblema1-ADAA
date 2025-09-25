@@ -7,7 +7,27 @@
 
 using namespace std;
 
-void readfiles(){
+string readFiles(const string &fileName){
+    ifstream file(fileName);
+    if(!file.is_open()){
+        cout << "El archivo " << fileName << " no se pudo abrir" << endl;
+        return "";
+    }
+
+    string text, line;
+
+    while(getline(file, line)){
+        text += line;    
+    }
+
+    file.close();
+    return text;
+}
+
+
+int main (){
+    vector<string> transmissions = {"transmission01.txt", "transmission02.txt"};
+    vector<string> mcodes = {"mcode01.txt", "mcode02.txt", "mcode03.txt"};
 
     vector<string> files = {
         "transmission01.txt",
@@ -17,37 +37,35 @@ void readfiles(){
         "mcode03.txt"
     };
 
-    for(const auto& fileName : files){
-        ifstream file(fileName);
-        if(!file.is_open()){
-            cout << "El archivo " << fileName << " no se pudo abrir" << endl;
-            continue;
+    // vector<string> targets;
+    // for (const auto &mfile : mcodes)
+    //     targets.push_back(readFiles(mfile));
+
+    for (const auto &files : files) {
+        string text = readFiles(files);
+        if (text.empty()){
+            cout << "No se encontró el archivo";
         }
 
-        string text;
+        cout << "Archivo: " << files << endl;
+        cout << text << endl;
 
-        cout << "Archivo: " << fileName << "\n";
-        while(getline(file, text)){    
-            cout << text << "\n";
+        cout << endl;
+    }  
+
+    for (const auto &transmissions : transmissions){
+        string textTransmission =  readFiles(transmissions);
+        if (textTransmission.empty()){
+            cout << "No se encontró el archivo";
         }
 
-        cout << "\n";
-        file.close();
+        cout << "Posicion palindromo mas largo encontrado en: " << transmissions << endl;
+        manacher(textTransmission);
+
+        cout << endl;
     }
-}
-
-int main (){
-
-    vector<string> transmissionFiles = {
-        "transmission01.txt",
-        "transmission21.txt",
-    };
-
-    for(int i = 0; i < transmissionFiles.size(); i++){
-        cout << transmissionFiles[i];
-    }
-
-    readfiles();
+    
+    // printFiles();
 
     return 0;
     

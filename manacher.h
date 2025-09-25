@@ -21,8 +21,6 @@ void manacher(const string &text){
     int sizePal = 0;
     int maxPivo = 0;
     int difference = -1;
-    int res = -1;
-    int end = -1;
 
     for (int i = 2; i < N; i++){
         iMirror = 2 * middle - i;
@@ -55,12 +53,12 @@ void manacher(const string &text){
         }
     }
 
-    res = (maxPivo - sizePal) / 2;
-    end = res + sizePal - 1;
+    int start = (maxPivo - sizePal) / 2;
+    int end = start + sizePal - 1;
 
-    cout << res << " " << end << endl;
+    cout << (start + 1) << " " << (end + 1) << endl;
+
 }
-
 
 #endif
 
