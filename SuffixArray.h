@@ -1,12 +1,5 @@
-/**
- * @file SuffixArray.h
- * @author Mauricio Olguín Sánchez
- * @Matricula A01711522
- * @brief 
- * @date 2025-09-24
- * 
- * 
- */
+#ifndef SUFFIXARRAY_H
+#define SUFFIXARRAY_H
 
 #include <iostream>
 #include <string>
@@ -15,85 +8,45 @@
 
 using namespace std;
 
-/**
- * @brief Función de partición para QuickSort. Toma el último elemento como pivote.
- * @param suffixArray El arreglo de índices de sufijos.
- * @param low El índice inicial del subarreglo.
- * @param high El índice final del subarreglo.
- * @param text La cadena original para comparar los sufijos.
- * @return La nueva posición del pivote.
- */
-int particion(vector<int>& suffixArray, int low, int high, const string& text) {
-    string suffixPivot = text.substr(suffixArray[high]);
-    int i = low - 1;
-    for (int j = low; j < high; ++j) {
-        if (text.substr(suffixArray[j]) < suffixPivot) {
-            i++;
-            swap(suffixArray[i], suffixArray[j]);
-        }
-    }
-    swap(suffixArray[i + 1], suffixArray[high]);
-    return (i + 1);
+int partition(vector<int>& suffixArray, int low, int high, const string& text) {
+string suffixPivot = text.substr(suffixArray[high]);
+int i = low - 1;
+for (int j = low; j < high; ++j) {
+if (text.substr(suffixArray[j]) < suffixPivot) {
+i++;
+swap(suffixArray[i], suffixArray[j]);
+}
+}
+swap(suffixArray[i + 1], suffixArray[high]);
+return (i + 1);
 }
 
-/**
- * @brief Ordena el arreglo de sufijos utilizando el algoritmo QuickSort de forma recursiva.
- * @param suffixArray El arreglo de índices de sufijos a ordenar.
- * @param low El índice inicial del subarreglo a ordenar.
- * @param high El índice final del subarreglo a ordenar.
- * @param text La cadena original para realizar las comparaciones.
- */
 void quickSort(vector<int>& suffixArray, int low, int high, const string& text) {
-    if (low < high) {
-        int indexPivot = particion(suffixArray, low, high, text);
-        quickSort(suffixArray, low, indexPivot - 1, text);
-        quickSort(suffixArray, indexPivot + 1, high, text);
-    }
+if (low < high) {
+int indexPivot = partition(suffixArray, low, high, text);
+quickSort(suffixArray, low, indexPivot - 1, text);
+quickSort(suffixArray, indexPivot + 1, high, text);
+}
 }
 
-/**
- * @brief Construye el Suffix Array para un texto dado.
- * @param text La cadena de caracteres original.
- * @return Un vector de enteros (Suffix Array) con los índices de los sufijos ordenados alfabéticamente.
- */
+// Construye y devuelve el Suffix Array para el texto dado.
 vector<int> suffixArray(const string& text) {
-    int longitud_text = text.length();
-    vector<int> suffixArray;
+int longitud_text = static_cast<int>(text.length());
+vector<int> suffixArray;
 
-    for (int i = 0; i < longitud_text; ++i) {
-        suffixArray.push_back(i);
-    }
-    quickSort(suffixArray, 0, longitud_text - 1, text);
-    return suffixArray;
+for (int i = 0; i < longitud_text; ++i) {
+suffixArray.push_back(i);
+}
+if (!suffixArray.empty())
+quickSort(suffixArray, 0, longitud_text - 1, text);
+return suffixArray;
 }
 
-/**
- * @brief Muestra el contenido del Suffix Array de forma legible.
- * @param suffixArray El arreglo de sufijos ya ordenado.
- * @param text La cadena de caracteres original.
- */
+// Muestra los sufijos ordenados (útil para depuración)
 void showSuffixArray(const vector<int>& suffixArray, const string& text) {
-
-    for (int indexSuffix : suffixArray) {
-        cout << text.substr(indexSuffix) << endl;
-    }
+for (int indexSuffix : suffixArray) {
+cout << text.substr(indexSuffix) << endl;
+}
 }
 
-
-int main() {
-    string s;
-
-    cout << "Ingresa una cadena: ";
-    getline(cin, s);
-
-    if (s.empty()) {
-        cout << "La cadena está vacía. No hay sufijos que mostrar." << endl;
-        return 0;
-    }
-
-    vector<int> arraySuffixed = suffixArray(s);
-
-    showSuffixArray(arraySuffixed, s);
-
-    return 0;
-}
+#endif // SUFFIXARRAY_H
