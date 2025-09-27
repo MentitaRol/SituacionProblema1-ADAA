@@ -1,3 +1,10 @@
+/**
+ * @file LCS.h
+ * @author Mauricio Olguín Sánchez
+ * @Matricula A01711522
+ * @brief Implementación de Longest Common Substring (LCS) utilizando programación dinámica.
+ */
+
 #ifndef LCS_H
 #define LCS_H
 
