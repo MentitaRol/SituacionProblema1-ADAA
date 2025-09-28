@@ -68,15 +68,4 @@ vector<int> suffixArray(const string& text) {
     return suffixArray;
 }
 
-/**
- * @brief Muestra el contenido del Suffix Array de forma legible.
- * @param suffixArray El arreglo de sufijos ya ordenado.
- * @param text La cadena de caracteres original.
- */
-void showSuffixArray(const vector<int>& suffixArray, const string& text) {
-    for (int indexSuffix : suffixArray) {
-        cout << text.substr(indexSuffix) << endl;
-    }
-}
-
 #endif // SUFFIXARRAY_H
