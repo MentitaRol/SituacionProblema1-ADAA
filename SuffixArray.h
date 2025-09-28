@@ -1,7 +1,6 @@
 /**
  * @file SuffixArray.h
- * @author Mauricio Olguín Sánchez
- * @Matricula A01711522
+ * @author Mauricio Olguín Sánchez - A01711522
  * @brief Implementación de un Suffix Array y funciones relacionadas.
  * 
  */

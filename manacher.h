@@ -1,3 +1,9 @@
+/**
+ * @file manacher.h
+ * @author Luisa Fernanda Valdez Guillén – A01711870
+ * @brief Implementación del algoritmo de Manacher para encontrar el palíndromo más largo en una cadena.
+ * 
+ */
 #ifndef MANACHER_H_INCLUDED
 #define MANACHER_H_INCLUDED
 
