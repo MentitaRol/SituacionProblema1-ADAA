@@ -29,7 +29,7 @@ int partition(vector<int>& suffixArray, int low, int high, const string& text) {
     string suffixPivot = text.substr(suffixArray[high]);
     int i = low - 1;
     for (int j = low; j < high; ++j) {
-        if (text.substr(suffixArray[j]) < suffixPivot) {
+        if (text.substr(suffixArray[j]) > suffixPivot) {
             i++;
             swap(suffixArray[i], suffixArray[j]);
         }
