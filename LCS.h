@@ -19,6 +19,8 @@ using namespace std;
  * @param s1 Cadena donde se busca la subcadena común.
  * @param s2 Cadena con la que se compara s1 para encontrar la subcadena común más larga.
  * @return vector<int> Vector de dos enteros {inicio, fin} en s1. Si no hay subcadena común devuelve {-1,-1}.
+ * 
+ * @note Complejidad: O(n*m), donde n = |s1| y m = |s2|.
  */
 vector<int> longestCommonSubstring(const string& s1, const string& s2) {
     int n = s1.size();

@@ -4,6 +4,7 @@
  * @brief Implementación del algoritmo de Manacher para encontrar el palíndromo más largo en una cadena.
  * 
  */
+
 #ifndef MANACHER_H_INCLUDED
 #define MANACHER_H_INCLUDED
 
@@ -13,6 +14,22 @@
 #include <vector>
 
 using namespace std;
+
+/**
+ * @brief Encuentra el palíndromo más largo en un texto utilizando el algoritmo de Manacher.
+ *
+ * Dada una cadena `text`, esta función:
+ * - Convierte la cadena en un formato extendido para manejar de forma uniforme 
+ *   palíndromos de longitud par e impar.
+ * - Calcula la longitud máxima de palíndromos centrados en cada posición.
+ * - Determina el palíndromo más largo y calcula su posición inicial y final
+ *   en la cadena original (índices 0-based).
+ * - Imprime en consola la posición inicial y final.
+ *
+ * @param text Cadena de entrada sobre la que se busca el palíndromo más largo.
+ * 
+ * @note Complejidad O(n), donde n es el tamaño del texto original.
+ */
 
 void manacher(const string &text){
     int N = text.size();
@@ -66,7 +83,6 @@ void manacher(const string &text){
 
     cout << res << " " << end << endl;
 }
-
 
 #endif
 
