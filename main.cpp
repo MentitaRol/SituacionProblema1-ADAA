@@ -53,22 +53,24 @@ bool compareAt(const string& text, int start, const string& pattern) {
 }
 
 /**
- * @brief Busca pattern en text usando el suffix array provisto en SuffixArray.h
+ * @brief Busca TODAS las ocurrencias de pattern en text usando el suffix array.
  * 
  * @param text el texto donde se busca
  * @param pattern el patrón a buscar
- * @return int la posición 1-based donde se encontró el patrón, o 0 si no se encontró
+ * @return vector<pair<int,int>> cada par {inicio, fin} en 1-based
  */
-int findUsingSuffixArray(const string& text, const string& pattern) {
-    if (pattern.empty()) return 1;
-    if (text.size() < pattern.size()) return 0;
+vector<pair<int,int>> findAllUsingSuffixArray(const string& text, const string& pattern) {
+    vector<pair<int,int>> results;
+    if (pattern.empty() || text.size() < pattern.size()) return results;
     vector<int> sa = suffixArray(text);
     for (int idx : sa) {
         if (compareAt(text, idx, pattern)) {
-            return idx;
+            int start = idx + 1;
+            int end = idx + pattern.size();
+            results.push_back({start, end});
         }
     }
-    return 0;
+    return results;
 }
 
 int main() {
@@ -93,22 +95,27 @@ int main() {
     for (size_t t = 0; t < transmissions.size(); ++t) {
         const string& transmission = transmissions[t];
         cout << "----------------------------\n";
-        cout << "Transmisión " << (t+1) << ":\n";
+        cout << "Transmision " << (t+1) << ":\n";
         for (const auto& mfile : mcodeFiles) {
             cout << "mcode " << mfile << ": ";
             string mcode = readFileConcat(mfile);
-            int pos = findUsingSuffixArray(transmission, mcode);
-            if (pos > 0) cout << "true " << pos << "\n";
-            else cout << "false\n";
+            vector<pair<int,int>> matches = findAllUsingSuffixArray(transmission, mcode);
+            if (!matches.empty()) {
+                for (auto &p : matches) {
+                    cout << "true " << p.first << " " << p.second << "\n";
+                }
+            } else {
+                cout << "false\n";
+            }
         }
         cout << "----------------------------\n";
     }
 
     // PARTE 2: palíndromo más largo en cada transmisión (start end)
     cout << "-----------------------------\n";
-    cout << "Palíndromos más largos en cada transmisión:\n";
+    cout << "Palindromos mas largos en cada transmision:\n";
     for (const auto& transmission : transmissions) {
-        cout << "Palíndromo más largo en la transmisión: " << transmission << " -> ";
+        cout << "Palindromo mas largo en la transmision: " << transmission << " -> ";
         manacher(transmission);
     }
     cout << "-----------------------------\n";
@@ -116,10 +123,10 @@ int main() {
     // PARTE 3: substring común más largo entre transmission01 y transmission02
     cout << "-----------------------------\n";
     if (transmissions.size() >= 2) {
-        cout << "Subcadena común más larga entre transmisión 1 y 2: ";
+        cout << "Subcadena comun mas larga entre transmision 1 y 2: ";
         vector<int> lcsRes0 = longestCommonSubstring(transmissions[0], transmissions[1]);
         if (lcsRes0.size() != 2 || lcsRes0[0] == -1) {
-            cout << "No se ha encontrado ninguna subcadena común.\n";
+            cout << "No se ha encontrado ninguna subcadena comun.\n";
         } else {
             cout << (lcsRes0[0]) << " " << (lcsRes0[1]) << "\n";
         }

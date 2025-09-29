@@ -24,6 +24,8 @@ using namespace std;
  * @param high El índice final del subarreglo.
  * @param text La cadena original para comparar los sufijos.
  * @return La nueva posición del pivote.
+ * 
+ * @note Complejidad: O((high-low) * L), en el peor caso.
  */
 int partition(vector<int>& suffixArray, int low, int high, const string& text) {
     string suffixPivot = text.substr(suffixArray[high]);
@@ -44,6 +46,8 @@ int partition(vector<int>& suffixArray, int low, int high, const string& text) {
  * @param low El índice inicial del subarreglo a ordenar.
  * @param high El índice final del subarreglo a ordenar.
  * @param text La cadena original para realizar las comparaciones.
+ * 
+ * @note Complejidad: O(n log n * L).
  */
 void quickSort(vector<int>& suffixArray, int low, int high, const string& text) {
     if (low < high) {
@@ -57,6 +61,8 @@ void quickSort(vector<int>& suffixArray, int low, int high, const string& text) 
  * @brief Construye el Suffix Array para un texto dado.
  * @param text La cadena de caracteres original.
  * @return Un vector de enteros (Suffix Array) con los índices de los sufijos ordenados alfabéticamente.
+ * 
+ * @note Complejidad: O(n log n * L).
  */
 vector<int> suffixArray(const string& text) {
     int longitud_text = text.length();
